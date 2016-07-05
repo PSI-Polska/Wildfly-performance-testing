@@ -1,4 +1,4 @@
-package pl.psi.wildfly_performance_testing.model;
+package pl.psi.wildfly_performance_testing.model.small;
 
 import javax.persistence.*;
 import java.io.Serializable;
