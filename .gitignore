@@ -1,4 +1,13 @@
-*.class
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+**/build
+/captures
+/app/app.iml
+.idea/
+*.iml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
