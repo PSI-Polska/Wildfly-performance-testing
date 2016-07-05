@@ -8,6 +8,11 @@
         <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
         <class>pl.psi.wildfly_performance_testing.model.Account</class>
         <class>pl.psi.wildfly_performance_testing.model.User</class>
+        <class>pl.psi.wildfly_performance_testing.model.small.Author</class>
+        <class>pl.psi.wildfly_performance_testing.model.small.Address</class>
+        <class>pl.psi.wildfly_performance_testing.model.small.Book</class>
+        <class>pl.psi.wildfly_performance_testing.model.small.Chapter</class>
+
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>

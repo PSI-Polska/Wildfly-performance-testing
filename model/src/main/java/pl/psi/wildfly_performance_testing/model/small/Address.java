@@ -42,4 +42,58 @@ public class Address implements Serializable{
     private String City;
 
 
+    @Column
+    private int dummyAtrib1;
+    @Column
+    private int dummyAtrib2;
+    @Column
+    private int dummyAtrib3;
+    @Column
+    private String dummyAtrib4;
+
+
+
+    @Column
+    private String dummyAtrib5;
+
+    public int getDummyAtrib1() {
+        return dummyAtrib1;
+    }
+
+    public void setDummyAtrib1(int dummyAtrib1) {
+        this.dummyAtrib1 = dummyAtrib1;
+    }
+
+    public int getDummyAtrib2() {
+        return dummyAtrib2;
+    }
+
+    public void setDummyAtrib2(int dummyAtrib2) {
+        this.dummyAtrib2 = dummyAtrib2;
+    }
+
+    public int getDummyAtrib3() {
+        return dummyAtrib3;
+    }
+
+    public void setDummyAtrib3(int dummyAtrib3) {
+        this.dummyAtrib3 = dummyAtrib3;
+    }
+
+    public String getDummyAtrib4() {
+        return dummyAtrib4;
+    }
+
+    public void setDummyAtrib4(String dummyAtrib4) {
+        this.dummyAtrib4 = dummyAtrib4;
+    }
+
+    public String getDummyAtrib5() {
+        return dummyAtrib5;
+    }
+
+    public void setDummyAtrib5(String dummyAtrib5) {
+        this.dummyAtrib5 = dummyAtrib5;
+    }
+
 }
