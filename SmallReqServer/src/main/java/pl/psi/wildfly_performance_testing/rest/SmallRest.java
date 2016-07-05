@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 @Path("/")
-public class HelloWorld {
+public class SmallRest {
     @Inject
     UserDao dao;
 
