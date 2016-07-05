@@ -1,10 +1,10 @@
-package pl.edu.amu.bawjs.jpa.model;
+package pl.psi.wildfly_performance_testing.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by mbocian on 2016-05-04.
+ * Created by ftrela on 2016-07-05.
  */
 @Entity
 @Table

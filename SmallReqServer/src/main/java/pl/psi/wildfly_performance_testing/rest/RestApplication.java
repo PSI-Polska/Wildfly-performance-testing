@@ -1,4 +1,4 @@
-package pl.edu.amu.bawjs.jpa.rest;
+package pl.psi.wildfly_performance_testing.rest;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

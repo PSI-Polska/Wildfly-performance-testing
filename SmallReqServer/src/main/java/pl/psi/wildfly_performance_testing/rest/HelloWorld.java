@@ -1,7 +1,7 @@
-package pl.edu.amu.bawjs.jpa.rest;
+package pl.psi.wildfly_performance_testing.rest;
 
-import pl.edu.amu.bawjs.jpa.dao.UserDao;
-import pl.edu.amu.bawjs.jpa.model.User;
+import pl.psi.wildfly_performance_testing.dao.UserDao;
+import pl.psi.wildfly_performance_testing.model.User;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
