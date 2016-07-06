@@ -1,22 +1,28 @@
 package pl.psi.wildfly_performance_testing.model.small;
 
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by mblaszyk on 2016-07-05.
  */
+@JsonRootName(value = "Author")
+@Entity
+@Table
 public class Author implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToMany()
-    List<Book> books;
+    @OneToMany(cascade=CascadeType.ALL,orphanRemoval = true)
+    List<Book> books = new ArrayList<>();
 
     @Column
     private String firstname;

@@ -1,5 +1,8 @@
 package pl.psi.wildfly_performance_testing.model.small;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -8,6 +11,7 @@ import java.util.List;
 /**
  * Created by mblaszyk on 2016-07-05.
  */
+@JsonRootName(value = "Book")
 @Entity
 @Table
 public class Book implements Serializable{
@@ -16,10 +20,10 @@ public class Book implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToMany()
+    @OneToMany(cascade = {CascadeType.ALL},orphanRemoval = true)
     List<Chapter> chapters;
 
-    @ManyToOne
+    @ManyToOne(cascade ={CascadeType.ALL})
     private Author author;
 
     @Column
@@ -55,6 +59,7 @@ public class Book implements Serializable{
         this.chapters = chapters;
     }
 
+    @JsonIgnore
     public Author getAuthor() {
         return author;
     }

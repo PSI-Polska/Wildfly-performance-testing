@@ -1,11 +1,10 @@
 package pl.psi.wildfly_performance_testing.rest;
 
-import pl.psi.wildfly_performance_testing.dao.AddressDao;
-import pl.psi.wildfly_performance_testing.dao.AuthorDao;
-import pl.psi.wildfly_performance_testing.dao.UserDao;
+import pl.psi.wildfly_performance_testing.dao.*;
 import pl.psi.wildfly_performance_testing.model.small.Address;
 import pl.psi.wildfly_performance_testing.model.small.Author;
 import pl.psi.wildfly_performance_testing.model.small.Book;
+import pl.psi.wildfly_performance_testing.model.small.Chapter;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -26,6 +25,12 @@ public class SmallRest {
     @Inject
     AddressDao addressDao;
 
+    @Inject
+    BookDao bookDao;
+
+    @Inject
+    ChapterDao chapterDao;
+
     Random randGenerator = new Random(4283);
 
     @GET
@@ -35,7 +40,9 @@ public class SmallRest {
     public Response getAuthors() {
         List<Author> all = authorDao.findAll();
         // lazy loading!
-        all.forEach(i -> i.getBooks().size());
+        all.forEach(i -> {
+            i.getBooks().forEach(j->j.getChapters().size());
+        });
         return Response.ok(all).build();
     }
 
@@ -60,6 +67,77 @@ public class SmallRest {
             createAuthor(i);
         }
         return Response.ok().build();
+    }
+
+    @GET
+    @Path("/books")
+    @Produces({"application/json"})
+    @Transactional
+    public Response getBooks() {
+        List<Book> all = bookDao.findAll();
+        // lazy loading!
+        all.forEach(i -> i.getChapters().size());
+        return Response.ok(all).build();
+    }
+
+
+    @GET
+    @Path("/books/create")
+    @Produces({"application/json"})
+    @Transactional
+    public Response newBooks() {
+        createBook();
+        return Response.ok().build();
+    }
+
+
+
+    @GET
+    @Path("/books/create/batch")
+    @Produces({"application/json"})
+    @Transactional
+    public Response newBooksBatch() {
+        for(int i=0;i<20+new Random().nextInt(20);i++){
+            createBook();
+        }
+        return Response.ok().build();
+    }
+
+    private void createBook() {
+        Book book = new Book();
+        book.setTitle(String.valueOf(randGenerator.nextInt()));
+        book.setDescription(String.valueOf(randGenerator.nextInt()));
+        createBookChapters(book);
+        book.setReleaseDate(generateDate(1945,10));
+        assignAuthor(book);
+        //bookDao.create(book);
+    }
+
+    private void assignAuthor(Book book) {
+        Author randAuthor = authorDao.getRandomEntity();
+        book.setAuthor(randAuthor);
+        randAuthor.getBooks().add(book);
+        authorDao.update(randAuthor);
+    }
+
+    private void createBookChapters(Book book) {
+        int chCount = 10+randGenerator.nextInt(50);
+        List<Chapter> chapters = new ArrayList<>();
+        for(int i=1;i<=chCount;i++){
+            chapters.add(createChapter(book,i));
+        }
+        book.setChapters(chapters);
+        book.setChapterCount(chCount);
+    }
+
+    private Chapter createChapter(Book book, int i) {
+        Chapter chapter= new Chapter();
+        chapter.setNumber(i);
+        chapter.setTitle(String.valueOf(randGenerator.nextInt()));
+        chapter.setContent(String.valueOf(randGenerator.nextLong()));
+        chapter.setBook(book);
+
+        return chapter;
     }
 
     private void createAuthor(int i) {

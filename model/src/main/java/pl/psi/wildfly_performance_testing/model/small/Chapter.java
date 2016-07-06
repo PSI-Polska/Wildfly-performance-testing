@@ -1,11 +1,17 @@
 package pl.psi.wildfly_performance_testing.model.small;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by mblaszyk on 2016-07-05.
  */
+@JsonRootName(value = "Chapter")
+@Entity
+@Table
 public class Chapter implements Serializable {
     public long getId() {
         return id;
@@ -22,6 +28,7 @@ public class Chapter implements Serializable {
     @ManyToOne
     private Book book;
 
+    @JsonIgnore
     public Book getBook() {
         return book;
     }

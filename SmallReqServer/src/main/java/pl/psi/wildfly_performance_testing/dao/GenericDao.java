@@ -1,5 +1,7 @@
 package pl.psi.wildfly_performance_testing.dao;
 
+import org.hibernate.criterion.Criterion;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -32,6 +34,16 @@ public abstract class GenericDao<T> {
 
     public List<T> findAll() {
         return (List<T>) entityManager.createQuery("SELECT t FROM " + clazz.getSimpleName() + " t").getResultList();
+    }
+
+    public T getRandomEntity() {
+        List<T> results = entityManager.createQuery("SELECT t FROM " + clazz.getSimpleName() + " t order by RANDOM()").setMaxResults(1).getResultList();
+
+        T foundEntity = null;
+        if(!results.isEmpty()){
+            foundEntity = results.get(0);
+        }
+        return foundEntity;
     }
 
     public EntityManager getEntityManager() {

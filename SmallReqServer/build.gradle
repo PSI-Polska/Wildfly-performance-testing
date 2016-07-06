@@ -20,6 +20,8 @@ buildscript {
 dependencies {
     providedCompile "javax:javaee-api:7.0"
 
+    providedCompile "org.hibernate:hibernate-core:5.2.1.Final"
+
     cargo 'org.wildfly:wildfly-controller-client:8.1.0.Final'
     cargo 'org.codehaus.cargo:cargo-ant:1.4.8'
 

@@ -1,11 +1,16 @@
 package pl.psi.wildfly_performance_testing.model.small;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by mblaszyk on 2016-07-05.
  */
+@JsonRootName(value = "Address")
+@Entity
+@Table
 public class Address implements Serializable{
     public long getId() {
         return id;
