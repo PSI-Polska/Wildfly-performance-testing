@@ -1,0 +1,29 @@
+big:
+  image: quay.io/psimes/psimes-wildfly-dev:10.0.0.CR2
+  links:
+   - db
+  ports:
+   - "8080:8080"
+   - "8787:8787"
+   - "9990:9990"
+   - "9999:9999"
+  environment:
+   - TZ=Europe/Warsaw
+small:
+  image: quay.io/psimes/psimes-wildfly-dev:10.0.0.CR2
+  links:
+   - db
+  ports:
+   - "8081:8080"
+   - "8788:8787"
+   - "9991:9990"
+   - "10000:9999"
+  environment:
+   - TZ=Europe/Warsaw
+db:
+  image: postgres
+  environment:
+    - POSTGRES_USER=jls
+    - POSTGRES_PASSWORD=jls
+  ports:
+   - "5432:5432"

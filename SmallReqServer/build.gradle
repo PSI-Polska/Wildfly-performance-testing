@@ -33,7 +33,8 @@ cargo {
     containerId = 'wildfly8x' // I know I'm using 9 but haven't seen this updated yet by cargo project
 
     remote {
-        hostname = 'localhost'
+        hostname = '192.168.99.100'
+        port = 8081
         username = 'jls' // Use your WildFly admin username
         password = 'jls' // Use your Wildfly admin password
     }
