@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
@@ -18,11 +19,11 @@ public class BigServiceEndpoint {
     BigService bigService;
 
     @GET
-    @Path("/calculate1")
+    @Path("/calculate1/{howManyRandomEntities}")
     @Produces({"application/json"})
     @Transactional
-    public Response calculate1() {
-        bigService.calculate1();
+    public Response calculate1(@PathParam("howManyRandomEntities") int howManyRandomEntities) {
+        bigService.calculate1(howManyRandomEntities);
         return Response.ok().build();
     }
 }

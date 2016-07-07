@@ -18,8 +18,8 @@ public class BigService {
     @Inject
     private ADao aDao;
 
-    public void calculate1() {
-        List<A> aRandomList = aDao.findRandomEntities(5);
+    public void calculate1(int howManyRandomEntities) {
+        List<A> aRandomList = aDao.findRandomEntities(howManyRandomEntities);
         double newDoubleAttribute1 = calculateNewDoubleAttribute1(aRandomList);
         setDoubleAttribute1ForAllEntitiesInLists(newDoubleAttribute1, aRandomList);
         addSomeNewObjects(aRandomList);
