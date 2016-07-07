@@ -2,6 +2,7 @@ package pl.psi.wildfly_performance_testing.model.big;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,13 +16,13 @@ public class A implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToMany
-    private List<B> bList;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<B> bList = new ArrayList<>();
 
-    @OneToMany
-    private List<C> cList;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<C> cList = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private D d;
 
     @Column
@@ -33,7 +34,7 @@ public class A implements Serializable {
     @Column
     private String TextAttribute3;
     @Column
-    private int NumberAttribute1;
+    private double NumberAttribute1;
     @Column
     private int NumberAttribute2;
     @Column
@@ -103,11 +104,11 @@ public class A implements Serializable {
         TextAttribute3 = textAttribute3;
     }
 
-    public int getNumberAttribute1() {
+    public double getDoubleAttribute1() {
         return NumberAttribute1;
     }
 
-    public void setNumberAttribute1(int numberAttribute1) {
+    public void setDoubleAttribute1(double numberAttribute1) {
         NumberAttribute1 = numberAttribute1;
     }
 

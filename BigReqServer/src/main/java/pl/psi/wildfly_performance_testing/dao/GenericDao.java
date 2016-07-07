@@ -30,8 +30,16 @@ public abstract class GenericDao<T> {
         entityManager.merge(entity);
     }
 
-    public List<T> findAll() {
+    public void updateAllEntities(List<T> entities) {
+        entities.forEach(this::update);
+    }
+
+    public List<T> findAllEntities() {
         return (List<T>) entityManager.createQuery("SELECT t FROM " + clazz.getSimpleName() + " t").getResultList();
+    }
+
+    public List<T> findRandomEntities(int howMany) {
+        return (List<T>) entityManager.createQuery("SELECT t FROM " + clazz.getSimpleName() + " t ORDER BY RAND()").setMaxResults(howMany).getResultList();
     }
 
     public EntityManager getEntityManager() {
