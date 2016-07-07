@@ -28,17 +28,17 @@ public class A implements Serializable {
     @Column
     private Date date;
     @Column
-    private String TextAttribute1;
+    private String textAttribute1;
     @Column
-    private String TextAttribute2;
+    private String textAttribute2;
     @Column
-    private String TextAttribute3;
+    private String textAttribute3;
     @Column
-    private double NumberAttribute1;
+    private double doubleAttribute1;
     @Column
-    private int NumberAttribute2;
+    private double doubleAttribute2;
     @Column
-    private int NumberAttribute3;
+    private long longAttribute1;
 
     public long getId() {
         return id;
@@ -81,50 +81,50 @@ public class A implements Serializable {
     }
 
     public String getTextAttribute1() {
-        return TextAttribute1;
+        return textAttribute1;
     }
 
     public void setTextAttribute1(String textAttribute1) {
-        TextAttribute1 = textAttribute1;
+        this.textAttribute1 = textAttribute1;
     }
 
     public String getTextAttribute2() {
-        return TextAttribute2;
+        return textAttribute2;
     }
 
     public void setTextAttribute2(String textAttribute2) {
-        TextAttribute2 = textAttribute2;
+        this.textAttribute2 = textAttribute2;
     }
 
     public String getTextAttribute3() {
-        return TextAttribute3;
+        return textAttribute3;
     }
 
     public void setTextAttribute3(String textAttribute3) {
-        TextAttribute3 = textAttribute3;
+        this.textAttribute3 = textAttribute3;
     }
 
     public double getDoubleAttribute1() {
-        return NumberAttribute1;
+        return doubleAttribute1;
     }
 
-    public void setDoubleAttribute1(double numberAttribute1) {
-        NumberAttribute1 = numberAttribute1;
+    public void setDoubleAttribute1(double doubleAttribute1) {
+        this.doubleAttribute1 = doubleAttribute1;
     }
 
-    public int getNumberAttribute2() {
-        return NumberAttribute2;
+    public double getDoubleAttribute2() {
+        return doubleAttribute2;
     }
 
-    public void setNumberAttribute2(int numberAttribute2) {
-        NumberAttribute2 = numberAttribute2;
+    public void setDoubleAttribute2(double doubleAttribute2) {
+        this.doubleAttribute2 = doubleAttribute2;
     }
 
-    public int getNumberAttribute3() {
-        return NumberAttribute3;
+    public long getLongAttribute1() {
+        return longAttribute1;
     }
 
-    public void setNumberAttribute3(int numberAttribute3) {
-        NumberAttribute3 = numberAttribute3;
+    public void setLongAttribute1(long longAttribute1) {
+        this.longAttribute1 = longAttribute1;
     }
 }

@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 @Path("/big-service")
 public class BigServiceEndpoint {
     @Inject
-    BigService bigService;
+    private BigService bigService;
 
     @GET
     @Path("/calculate1/{howManyRandomEntities}")
@@ -25,5 +25,14 @@ public class BigServiceEndpoint {
     public Response calculate1(@PathParam("howManyRandomEntities") int howManyRandomEntities) {
         bigService.calculate1(howManyRandomEntities);
         return Response.ok().build();
+    }
+
+    @GET
+    @Path("/calculate2")
+    @Produces({"application/json"})
+    @Transactional
+    public Response calculate2() {
+        double result = bigService.calculate2();
+        return Response.ok(result).build();
     }
 }

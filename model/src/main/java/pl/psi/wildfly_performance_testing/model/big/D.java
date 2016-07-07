@@ -25,9 +25,9 @@ public class D implements Serializable {
     private G g;
 
     @Column
-    private double NumberAttribute1;
+    private double doubleAttribute1;
     @Column
-    private int NumberAttribute2;
+    private double doubleAttribute2;
 
     public long getId() {
         return id;
@@ -54,18 +54,18 @@ public class D implements Serializable {
     }
 
     public double getDoubleAttribute1() {
-        return NumberAttribute1;
+        return doubleAttribute1;
     }
 
-    public void setDoubleAttribute1(double numberAttribute1) {
-        NumberAttribute1 = numberAttribute1;
+    public void setDoubleAttribute1(double doubleAttribute1) {
+        this.doubleAttribute1 = doubleAttribute1;
     }
 
-    public int getNumberAttribute2() {
-        return NumberAttribute2;
+    public double getDoubleAttribute2() {
+        return doubleAttribute2;
     }
 
-    public void setNumberAttribute2(int numberAttribute2) {
-        NumberAttribute2 = numberAttribute2;
+    public void setDoubleAttribute2(double doubleAttribute2) {
+        this.doubleAttribute2 = doubleAttribute2;
     }
 }
