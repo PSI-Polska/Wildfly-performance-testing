@@ -23,6 +23,8 @@ dependencies {
     cargo 'org.wildfly:wildfly-controller-client:8.1.0.Final'
     cargo 'org.codehaus.cargo:cargo-ant:1.4.8'
 
+    compile group: 'com.google.guava', name: 'guava', version: '19.0'
+
     compile project(":model")
 }
 
@@ -35,5 +37,9 @@ cargo {
         port = 8080
         username = 'jls' // Use your WildFly admin username
         password = 'jls' // Use your Wildfly admin password
+        containerProperties {
+            property 'cargo.jboss.management-http.port', 9990
+            property 'cargo.servlet.port', 8080
+        }
     }
 }

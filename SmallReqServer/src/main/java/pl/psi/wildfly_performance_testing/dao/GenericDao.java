@@ -1,6 +1,8 @@
 package pl.psi.wildfly_performance_testing.dao;
 
-import org.hibernate.criterion.Criterion;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import pl.psi.wildfly_performance_testing.model.WithK;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -11,31 +13,41 @@ import java.util.List;
  * Created by mbocian on 2016-05-04.
  */
 @Stateless
-public abstract class GenericDao<T> {
+public abstract class GenericDao<T extends WithK> implements GenericDaoIf<T> {
     @Inject
     private EntityManager entityManager;
     private Class<T> clazz;
+
+
 
     public GenericDao(Class<T> clazz) {
         this.clazz = clazz;
     }
 
+    @Override
     public void create(T entity) {
         entityManager.persist(entity);
+
     }
 
+    @Override
     public void remove(T entity) {
         entityManager.remove(entity);
+
     }
 
+    @Override
     public void update(T entity) {
         entityManager.merge(entity);
+
     }
 
+    @Override
     public List<T> findAll() {
         return (List<T>) entityManager.createQuery("SELECT t FROM " + clazz.getSimpleName() + " t").getResultList();
     }
 
+    @Override
     public T getRandomEntity() {
         List<T> results = entityManager.createQuery("SELECT t FROM " + clazz.getSimpleName() + " t order by RANDOM()").setMaxResults(1).getResultList();
 

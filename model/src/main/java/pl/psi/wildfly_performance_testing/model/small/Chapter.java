@@ -2,6 +2,7 @@ package pl.psi.wildfly_performance_testing.model.small;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import pl.psi.wildfly_performance_testing.model.WithK;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.io.Serializable;
 @JsonRootName(value = "Chapter")
 @Entity
 @Table
-public class Chapter implements Serializable {
+public class Chapter implements Serializable,WithK {
     public long getId() {
         return id;
     }
