@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class Resources {
 
     @Produces
-    @PersistenceContext
+    @PersistenceContext(name = "PersistenceUnit")
     private EntityManager em;
 
     @Produces

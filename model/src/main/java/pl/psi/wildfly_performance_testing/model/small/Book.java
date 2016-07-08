@@ -2,6 +2,7 @@ package pl.psi.wildfly_performance_testing.model.small;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import pl.psi.wildfly_performance_testing.model.WithK;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,7 +15,7 @@ import java.util.List;
 @JsonRootName(value = "Book")
 @Entity
 @Table
-public class Book implements Serializable{
+public class Book implements Serializable,WithK {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
