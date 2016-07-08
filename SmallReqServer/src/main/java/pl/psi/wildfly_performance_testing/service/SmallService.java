@@ -1,8 +1,6 @@
 package pl.psi.wildfly_performance_testing.service;
 
-import pl.psi.wildfly_performance_testing.dao.AddressDao;
-import pl.psi.wildfly_performance_testing.dao.AuthorDao;
-import pl.psi.wildfly_performance_testing.dao.BookDao;
+import pl.psi.wildfly_performance_testing.dao.*;
 import pl.psi.wildfly_performance_testing.model.small.Address;
 import pl.psi.wildfly_performance_testing.model.small.Author;
 import pl.psi.wildfly_performance_testing.model.small.Book;
@@ -15,11 +13,11 @@ import java.util.*;
 public class SmallService {
 
     @Inject
-    AuthorDao authorDao;
+    AuthorCrudService authorDao;
     @Inject
-    AddressDao addressDao;
+    AddressCrudService addressCrudServ;
     @Inject
-    BookDao bookDao;
+    BookCrudService bookDao;
     Random randGenerator = new Random(4283);
 
     public SmallService() {
@@ -106,7 +104,7 @@ public class SmallService {
         address.setCity(String.valueOf(randGenerator.nextInt()));
         address.setCountry(String.valueOf(randGenerator.nextInt()));
         setAddressDummies(i, address);
-        addressDao.create(address);
+        addressCrudServ.create(address);
         return address;
     }
 

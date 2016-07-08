@@ -36,6 +36,8 @@ public class Seeder {
     private void initBooks() {
         for (int i = 0; i < numberOfBooks / bookBatchSize; i++) {
             initBooksBatch(bookBatchSize);
+            logger.info("Books populated: " + (i * bookBatchSize) / numberOfBooks + "%");
+
         }
     }
 
@@ -43,8 +45,7 @@ public class Seeder {
     private void initBooksBatch(int batch) {
         for (int i = 0; i < batch; i++) {
             sService.createBook();
-            if((i%700)==0)
-            logger.info("Books populated: " + i * 100 / numberOfBooks + "%");
+
         }
     }
 

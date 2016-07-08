@@ -5,44 +5,47 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import pl.psi.wildfly_performance_testing.model.WithK;
 
+import javax.ejb.Stateful;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Created by mblaszyk on 2016-07-08.
  */
-public class CachedDaoDecorator<T extends WithK> extends GenericDaoDecorator<T> {
+public class CachedDaoDecorator<T extends WithK> implements GenericDaoIf<T> {
 
-    private Cache<Long,T> cache= CacheBuilder.newBuilder().build();
 
-    CachedDaoDecorator(GenericDaoIf<T> basicDao) {
-        super(basicDao);
+    private Cache<Long, T> cache = CacheBuilder.newBuilder().build();
+
+    GenericDaoIf<T> decoratedDao;
+
+    CachedDaoDecorator(GenericDaoIf<T> decoratedDao) {
+        this.decoratedDao = decoratedDao;
     }
 
     @Override
     public void create(T entity) {
-        super.create(entity);
-        cache.put(entity.getId(),entity);
+        decoratedDao.create(entity);
+        cache.put(entity.getId(), entity);
     }
 
     @Override
     public void remove(T entity) {
-        super.remove(entity);
+        decoratedDao.remove(entity);
         cache.invalidate(entity.getId());
     }
 
     @Override
     public void update(T entity) {
-        super.update(entity);
-        cache.put(entity.getId(),entity);
+        decoratedDao.update(entity);
+        cache.put(entity.getId(), entity);
     }
 
     @Override
     public List<T> findAll() {
-        List<T> all = new ArrayList<T>(cache.asMap().values());
-        return all;
-
+        return cache.asMap().values().stream().collect(Collectors.toList());
     }
 
     @Override

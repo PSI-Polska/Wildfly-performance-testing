@@ -12,16 +12,15 @@ import java.util.List;
 /**
  * Created by mbocian on 2016-05-04.
  */
-@Stateless
-public abstract class GenericDao<T extends WithK> implements GenericDaoIf<T> {
-    @Inject
+public class CoreDao<T extends WithK> implements GenericDaoIf<T> {
+
     private EntityManager entityManager;
     private Class<T> clazz;
 
 
-
-    public GenericDao(Class<T> clazz) {
+    public CoreDao(Class<T> clazz, EntityManager entityManager) {
         this.clazz = clazz;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -52,7 +51,7 @@ public abstract class GenericDao<T extends WithK> implements GenericDaoIf<T> {
         List<T> results = entityManager.createQuery("SELECT t FROM " + clazz.getSimpleName() + " t order by RANDOM()").setMaxResults(1).getResultList();
 
         T foundEntity = null;
-        if(!results.isEmpty()){
+        if (!results.isEmpty()) {
             foundEntity = results.get(0);
         }
         return foundEntity;
@@ -60,5 +59,9 @@ public abstract class GenericDao<T extends WithK> implements GenericDaoIf<T> {
 
     public EntityManager getEntityManager() {
         return entityManager;
+    }
+
+    public void setEntityManager(EntityManager em) {
+        this.entityManager = em;
     }
 }
