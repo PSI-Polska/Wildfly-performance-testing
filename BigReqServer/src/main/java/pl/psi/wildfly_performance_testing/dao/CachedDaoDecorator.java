@@ -19,6 +19,8 @@ class CachedDaoDecorator<T extends WithK> implements GenericDaoIf<T> {
 
     private GenericDaoIf<T> decoratedDao;
 
+    private Random random = new Random(123);
+
     CachedDaoDecorator(GenericDaoIf<T> decoratedDao) {
         this.decoratedDao = decoratedDao;
     }
@@ -58,10 +60,16 @@ class CachedDaoDecorator<T extends WithK> implements GenericDaoIf<T> {
 
         List<Long> allKeys = Lists.newArrayList(cache.asMap().keySet());
         for (int i = 0; i < howMany; i++) {
-            int randomIndex = new Random().nextInt(allKeys.size());
+            int randomIndex = random.nextInt(allKeys.size());
             long randomKey = allKeys.get(randomIndex);
 
-            randomEntities.add(cache.getIfPresent(randomKey));
+            T value = cache.getIfPresent(randomKey);
+            if (value != null) {
+                randomEntities.add(value);
+            } else {
+                throw new IllegalStateException(randomKey + " key not found");
+            }
+
         }
         return randomEntities;
     }

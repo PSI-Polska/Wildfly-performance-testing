@@ -18,6 +18,8 @@ class SubService1 {
     @Inject
     private ACrudService aCrudService;
 
+    private Random random = new Random(456);
+
     void calculate1(int howManyRandomEntities) {
         List<A> aRandomList = aCrudService.findRandomEntities(howManyRandomEntities);
         double newDoubleAttribute1 = calculateNewDoubleAttribute1(aRandomList);
@@ -27,7 +29,7 @@ class SubService1 {
     }
 
     private double calculateNewDoubleAttribute1(List<A> aList) {
-        return calculateAverageOfDoubleAttribute1(aList) * new Random().nextDouble();
+        return calculateAverageOfDoubleAttribute1(aList) * random.nextDouble();
     }
 
     private double calculateAverageOfDoubleAttribute1(List<A> aList) {
