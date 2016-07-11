@@ -1,6 +1,6 @@
 package pl.psi.wildfly_performance_testing.service;
 
-import pl.psi.wildfly_performance_testing.dao.ADao;
+import pl.psi.wildfly_performance_testing.dao.ACrudService;
 import pl.psi.wildfly_performance_testing.model.big.A;
 
 import javax.ejb.Stateless;
@@ -13,19 +13,13 @@ import java.util.List;
 @Stateless
 public class AService {
     @Inject
-    private ADao aDao;
+    private ACrudService aCrudService;
 
     public List<A> getAList() {
-        List<A> allA = aDao.findAllEntities();
-        // lazy loading!
-        allA.forEach(a -> {
-            a.getbList().size();
-            a.getcList().size();
-        });
-        return allA;
+        return aCrudService.findAll();
     }
 
     public void createA(A a) {
-        aDao.create(a);
+        aCrudService.create(a);
     }
 }

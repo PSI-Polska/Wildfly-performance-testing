@@ -1,6 +1,6 @@
 package pl.psi.wildfly_performance_testing.service;
 
-import pl.psi.wildfly_performance_testing.dao.CDao;
+import pl.psi.wildfly_performance_testing.dao.CCrudService;
 import pl.psi.wildfly_performance_testing.model.big.C;
 
 import javax.ejb.Stateless;
@@ -13,10 +13,10 @@ import java.util.List;
 @Stateless
 class SubService2 {
     @Inject
-    private CDao cDao;
+    private CCrudService cCrudService;
 
     double calculateMedian() {
-        List<C> cList = cDao.findAllEntities();
+        List<C> cList = cCrudService.findAll();
         if (cList.isEmpty()) {
             throw new IllegalStateException("cList is empty");
         }

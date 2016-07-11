@@ -1,5 +1,7 @@
 package pl.psi.wildfly_performance_testing.model.big;
 
+import pl.psi.wildfly_performance_testing.model.WithK;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,7 +10,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table
-public class C implements Serializable {
+public class C implements Serializable, WithK {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -18,6 +20,7 @@ public class C implements Serializable {
     @Column
     private double doubleAttribute2;
 
+    @Override
     public long getId() {
         return id;
     }
