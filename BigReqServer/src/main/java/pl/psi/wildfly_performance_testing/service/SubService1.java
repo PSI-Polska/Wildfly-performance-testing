@@ -1,6 +1,6 @@
 package pl.psi.wildfly_performance_testing.service;
 
-import pl.psi.wildfly_performance_testing.dao.ADao;
+import pl.psi.wildfly_performance_testing.dao.ACrudService;
 import pl.psi.wildfly_performance_testing.model.big.A;
 import pl.psi.wildfly_performance_testing.model.big.B;
 
@@ -16,14 +16,14 @@ import java.util.Random;
 @Stateless
 class SubService1 {
     @Inject
-    private ADao aDao;
+    private ACrudService aCrudService;
 
     void calculate1(int howManyRandomEntities) {
-        List<A> aRandomList = aDao.findRandomEntities(howManyRandomEntities);
+        List<A> aRandomList = aCrudService.findRandomEntities(howManyRandomEntities);
         double newDoubleAttribute1 = calculateNewDoubleAttribute1(aRandomList);
         setDoubleAttribute1ForAllEntitiesInLists(newDoubleAttribute1, aRandomList);
         addSomeNewObjects(aRandomList);
-        aDao.updateAllEntities(aRandomList);
+        aCrudService.updateAllEntities(aRandomList);
     }
 
     private double calculateNewDoubleAttribute1(List<A> aList) {

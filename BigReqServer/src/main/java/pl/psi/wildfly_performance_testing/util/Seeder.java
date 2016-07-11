@@ -1,6 +1,7 @@
-package pl.psi.wildfly_performance_testing;
+package pl.psi.wildfly_performance_testing.util;
 
-import pl.psi.wildfly_performance_testing.dao.ADao;
+import pl.psi.wildfly_performance_testing.dao.ACrudService;
+import pl.psi.wildfly_performance_testing.dao.CCrudService;
 import pl.psi.wildfly_performance_testing.model.big.*;
 
 import javax.annotation.PostConstruct;
@@ -24,7 +25,10 @@ public class Seeder {
     private Random random = new Random(94);
 
     @Inject
-    private ADao aDao;
+    private ACrudService aCrudService;
+
+    @Inject
+    private CCrudService cCrudService;
 
     @Inject
     private Logger logger;
@@ -46,7 +50,7 @@ public class Seeder {
             seedCObjectsIntoList(a.getcList());
             seedDObjectIntoAObject(a);
 
-            aDao.update(a);
+            aCrudService.create(a);
 
             logger.info("Logger populated: " + i * 100 / numberOfObjects + "%");
         }
@@ -76,6 +80,7 @@ public class Seeder {
                 c.setDoubleAttribute1(random.nextDouble());
                 c.setDoubleAttribute2(random.nextDouble());
                 cList.add(c);
+                cCrudService.create(c);
             }
         }
     }

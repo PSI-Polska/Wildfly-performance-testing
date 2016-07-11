@@ -15,7 +15,7 @@ import java.util.List;
 @Path("/a-service")
 public class AServiceEndpoint {
     @Inject
-    AService aService;
+    private AService aService;
 
     @GET
     @Path("/as")
