@@ -14,10 +14,11 @@ import java.util.stream.Collectors;
 /**
  * Created by mblaszyk on 2016-07-08.
  */
+
 public class CachedDaoDecorator<T extends WithK> implements GenericDaoIf<T> {
 
 
-    private Cache<Long, T> cache = CacheBuilder.newBuilder().build();
+    private final Cache<Long, T> cache = CacheBuilder.newBuilder().build();
 
     GenericDaoIf<T> decoratedDao;
     private Random random = new Random(4283);

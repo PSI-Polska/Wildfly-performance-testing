@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+<Appenders>
+<Console name="STDOUT" target="SYSTEM_OUT">
+    <RegexFilter regex=".* nextval .*" onMatch="DENY" onMismatch="ACCEPT"/>
+<PatternLayout pattern="%d{ABSOLUTE} %5p %c{1}:%L - %m%n"/>
+</Console>
+</Appenders>
+<Loggers>
+<!--<Logger name="org.apache.log4j.xml" level="debug"/>-->
+<Root level="trace">
+<AppenderRef ref="STDOUT"/>
+</Root>
+<Logger name="org.hibernate" level="trace"/>
+<Logger name="org.hibernate.SQL" level="DEBUG"/>
+<Logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    <Logger name="org.hibernate.jdbc" level="TRACE"/>
+</Loggers>
+</Configuration>

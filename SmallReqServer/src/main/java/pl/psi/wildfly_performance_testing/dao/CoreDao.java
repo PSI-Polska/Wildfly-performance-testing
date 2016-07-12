@@ -2,6 +2,7 @@ package pl.psi.wildfly_performance_testing.dao;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import org.apache.logging.log4j.Logger;
 import pl.psi.wildfly_performance_testing.model.WithK;
 
 import javax.ejb.Stateless;
