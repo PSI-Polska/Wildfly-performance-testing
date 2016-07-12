@@ -7,7 +7,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created by mblaszyk on 2016-07-08.
@@ -36,7 +36,7 @@ public class Seeder {
     private void initBooks() {
         for (int i = 0; i < numberOfBooks / bookBatchSize; i++) {
             initBooksBatch(bookBatchSize);
-            logger.info("Books populated: " + (i * bookBatchSize) / numberOfBooks + "%");
+            logger.info("Books populated: " + (i * bookBatchSize) * 100 / numberOfBooks + "%");
 
         }
     }

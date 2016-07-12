@@ -8,6 +8,9 @@ import pl.psi.wildfly_performance_testing.model.small.Chapter;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.*;
 @Stateless
 public class SmallService {
@@ -18,6 +21,9 @@ public class SmallService {
     AddressCrudService addressCrudServ;
     @Inject
     BookCrudService bookDao;
+
+//    @Inject
+//            EntityManager entityManager;
     Random randGenerator = new Random(4283);
 
     public SmallService() {
@@ -39,6 +45,8 @@ public class SmallService {
     }
 
     public void createBook() {
+
+        //setTransactionLvlUncomitted();
         Book book = new Book();
         book.setTitle(String.valueOf(randGenerator.nextInt()));
         book.setDescription(String.valueOf(randGenerator.nextInt()));
@@ -48,6 +56,15 @@ public class SmallService {
         //bookDao.create(book);
     }
 
+//    private void setTransactionLvlUncomitted() {
+//        Connection connection = entityManager.unwrap(Connection.class);
+//        try {
+//            connection.setTransactionIsolation(Connection.TRANSACTION_NONE);
+//        } catch (SQLException e) {
+//            throw new IllegalStateException(e);
+//        }
+//    }
+
     void assignAuthor(Book book) {
         Author randAuthor = authorDao.getRandomEntity();
         book.setAuthor(randAuthor);
@@ -56,7 +73,7 @@ public class SmallService {
     }
 
     void createBookChapters(Book book) {
-        int chCount = 10 + randGenerator.nextInt(50);
+        int chCount = 2 + randGenerator.nextInt(5);
         List<Chapter> chapters = new ArrayList<Chapter>();
         for (int i = 1; i <= chCount; i++) {
             chapters.add(createChapter(book, i));
@@ -76,6 +93,7 @@ public class SmallService {
     }
 
     public void createAuthor(int i) {
+        //setTransactionLvlUncomitted();
         Author author = initAuthor();
         author.setAddress(createAddress(i));
         authorDao.create(author);

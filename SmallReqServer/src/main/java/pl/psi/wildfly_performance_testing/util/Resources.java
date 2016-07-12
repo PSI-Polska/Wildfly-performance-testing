@@ -1,10 +1,12 @@
 package pl.psi.wildfly_performance_testing.util;
 
+import org.apache.logging.log4j.LogManager;
+
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.logging.Logger;
+
 
 public class Resources {
 
@@ -13,7 +15,8 @@ public class Resources {
     private EntityManager em;
 
     @Produces
-    public Logger produceLog(InjectionPoint injectionPoint) {
-        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+    public org.apache.logging.log4j.Logger produceLog(InjectionPoint injectionPoint) {
+        return LogManager.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+
     }
 }
