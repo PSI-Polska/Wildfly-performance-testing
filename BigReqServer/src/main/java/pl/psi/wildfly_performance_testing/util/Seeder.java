@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 @Singleton
 @Startup
 public class Seeder {
-    private final int numberOfObjects = 300;
+    private final int numberOfObjects = 200;
     private final int creatingObjectProbabilityInPercentage = 50;
     private Random random = new Random(94);
 
