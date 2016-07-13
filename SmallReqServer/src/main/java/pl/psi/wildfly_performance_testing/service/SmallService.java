@@ -1,5 +1,6 @@
 package pl.psi.wildfly_performance_testing.service;
 
+import org.apache.logging.log4j.Logger;
 import pl.psi.wildfly_performance_testing.dao.*;
 import pl.psi.wildfly_performance_testing.model.small.Address;
 import pl.psi.wildfly_performance_testing.model.small.Author;
@@ -21,6 +22,8 @@ public class SmallService {
     AddressCrudService addressCrudServ;
     @Inject
     BookCrudService bookDao;
+    @Inject
+            Logger logger;
 
 //    @Inject
 //            EntityManager entityManager;
@@ -45,15 +48,18 @@ public class SmallService {
     }
 
     public void createBook() {
-
+        long t1 = System.currentTimeMillis();
         //setTransactionLvlUncomitted();
         Book book = new Book();
         book.setTitle(String.valueOf(randGenerator.nextInt()));
         book.setDescription(String.valueOf(randGenerator.nextInt()));
         createBookChapters(book);
         book.setReleaseDate(generateDate(1945, 10));
-        assignAuthor(book);
+        assignAuthor(book,t1);
+
         //bookDao.create(book);
+        //long t3 = System.currentTimeMillis();
+
     }
 
 //    private void setTransactionLvlUncomitted() {
@@ -65,15 +71,18 @@ public class SmallService {
 //        }
 //    }
 
-    void assignAuthor(Book book) {
+    void assignAuthor(Book book, long t1) {
         Author randAuthor = authorDao.getRandomEntity();
         book.setAuthor(randAuthor);
         randAuthor.getBooks().add(book);
+        long t2 = System.currentTimeMillis();
         authorDao.update(randAuthor);
+        long t3 = System.currentTimeMillis();
+        logger.warn("Book - Time calc: "+(t2-t1)+" -- Time commit: "+(t3-t2));
     }
 
     void createBookChapters(Book book) {
-        int chCount = 2 + randGenerator.nextInt(5);
+        int chCount = 10 + randGenerator.nextInt(10);
         List<Chapter> chapters = new ArrayList<Chapter>();
         for (int i = 1; i <= chCount; i++) {
             chapters.add(createChapter(book, i));
@@ -94,9 +103,13 @@ public class SmallService {
 
     public void createAuthor(int i) {
         //setTransactionLvlUncomitted();
+        long t1 = System.currentTimeMillis();
         Author author = initAuthor();
         author.setAddress(createAddress(i));
+        long t2 = System.currentTimeMillis();
         authorDao.create(author);
+        long t3 = System.currentTimeMillis();
+        logger.warn("Author - Time calc: "+(t2-t1)+" -- Time commit: "+(t3-t2));
     }
 
     Author initAuthor() {
@@ -122,7 +135,7 @@ public class SmallService {
         address.setCity(String.valueOf(randGenerator.nextInt()));
         address.setCountry(String.valueOf(randGenerator.nextInt()));
         setAddressDummies(i, address);
-        addressCrudServ.create(address);
+        //addressCrudServ.create(address);
         return address;
     }
 

@@ -37,7 +37,7 @@ public class Author implements Serializable,WithK {
     @Column
     private Date dateOfDeath;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     private Address address;
 
     public long getId() {

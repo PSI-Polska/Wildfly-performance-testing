@@ -15,9 +15,9 @@ import org.apache.logging.log4j.Logger;
 @Singleton
 @Startup
 public class Seeder {
-    private final int numberOfAuthors = 3000;
-    private final int numberOfBooks = 7000;
-    private final int bookBatchSize = 200;
+    private final int numberOfAuthors = 10;
+    private final int numberOfBooks = 30;
+    private final int bookBatchSize = 5;
 
     @Inject
     SmallService sService;

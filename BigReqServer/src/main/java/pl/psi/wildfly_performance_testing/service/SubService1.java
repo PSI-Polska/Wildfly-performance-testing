@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * Created by ftrela on 2016-07-07.
@@ -18,14 +19,21 @@ class SubService1 {
     @Inject
     private ACrudService aCrudService;
 
+    @Inject
+    Logger logger;
+
     private Random random = new Random(456);
 
     void calculate1(int howManyRandomEntities) {
+        long t1 = System.currentTimeMillis();
         List<A> aRandomList = aCrudService.findRandomEntities(howManyRandomEntities);
         double newDoubleAttribute1 = calculateNewDoubleAttribute1(aRandomList);
         setDoubleAttribute1ForAllEntitiesInLists(newDoubleAttribute1, aRandomList);
         addSomeNewObjects(aRandomList);
+        long t2 = System.currentTimeMillis();
         aCrudService.updateAllEntities(aRandomList);
+        long t3=System.currentTimeMillis();
+        logger.warning("Time calc: "+(t2-t1)+" -- Time commit: "+(t3-t2));
     }
 
     private double calculateNewDoubleAttribute1(List<A> aList) {

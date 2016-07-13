@@ -16,6 +16,7 @@
         <class>pl.psi.wildfly_performance_testing.model.big.H</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.jdbc.batch_size" value="50" />
         </properties>
     </persistence-unit>
 </persistence>
